@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:layout_width="match_parent"
+<LinearLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="@dimen/dim_24"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -25,6 +25,7 @@
                 android:textColor="@color/black"/>
 
             <FrameLayout
+                android:id="@+id/input_image_sign_up_frame_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_20sdp">
@@ -34,9 +35,11 @@
                     android:layout_width="@dimen/_80sdp"
                     android:layout_height="@dimen/_80sdp"
                     android:background="@drawable/image_background"
-                    android:scaleType="centerCrop"/>
+                    android:scaleType="centerCrop"
+                    app:shapeAppearanceOverlay="@style/rounded_image_view_style"/>
 
                 <TextView
+                    android:id="@+id/input_image_sign_up_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Add image"
@@ -110,17 +113,33 @@
                 android:textSize="@dimen/_13ssp"
                 />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/sign_up_button"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_50sdp"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:text="Sign Up"
-                android:textSize="@dimen/_13ssp"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:background="@drawable/sign_in_up_button_background"
-                />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:animateLayoutChanges="true">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/sign_up_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_50sdp"
+                    android:text="Sign Up"
+                    android:textSize="@dimen/_13ssp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:background="@drawable/sign_in_up_button_background"
+                    />
+                
+                <ProgressBar
+                    android:id="@+id/sign_up_progress_bar"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:visibility="invisible"
+                    android:layout_gravity="center"/>
+
+            </FrameLayout>
+
+
 
             <TextView
                 android:id="@+id/text_create_new_account"
