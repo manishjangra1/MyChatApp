@@ -117,11 +117,11 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private String encodedImage(Bitmap bitmap){
-        int previewWidth = 150;
+        int previewWidth = 600;
         int previewHeight = bitmap.getHeight()* previewWidth / bitmap.getWidth();
         Bitmap previewBitmap = Bitmap.createScaledBitmap(bitmap, previewWidth, previewHeight, false);
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        previewBitmap.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream);
+        previewBitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
         byte[] bytes = byteArrayOutputStream.toByteArray();
         return android.util.Base64.encodeToString(bytes, android.util.Base64.DEFAULT);
 
