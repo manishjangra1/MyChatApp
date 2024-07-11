@@ -2,6 +2,7 @@ package com.manishjangra.mychatapp.activities;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -23,7 +24,7 @@ import com.manishjangra.mychatapp.databinding.ActivityMainBinding;
 import com.manishjangra.mychatapp.databinding.CustomAppBarLayoutBinding;
 import com.manishjangra.mychatapp.fragments.HomeFragment;
 import com.manishjangra.mychatapp.fragments.MyAccountFragment;
-import com.manishjangra.mychatapp.fragments.UpdatesFragment;
+import com.manishjangra.mychatapp.fragments.ConversationFragment;
 import com.manishjangra.mychatapp.fragments.UsersFragment;
 import com.manishjangra.mychatapp.model.User;
 import com.manishjangra.mychatapp.utilities.Constants;
@@ -36,20 +37,20 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private PreferenceManager preferenceManager;
     private UserViewModel userViewModel;
-    private CustomAppBarLayoutBinding customAppBarLayoutBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
+        //setContentView(R.layout.activity_main);
 
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        customAppBarLayoutBinding = CustomAppBarLayoutBinding.bind(findViewById(R.id.main_app_bar_layout));
+//        customAppBarLayoutBinding = CustomAppBarLayoutBinding.bind(findViewById(R.id.main_app_bar_layout));
 //  --> wrong approach      customAppBarLayoutBinding = CustomAppBarLayoutBinding.inflate(getLayoutInflater());
-        setSupportActionBar(customAppBarLayoutBinding.customToolbar);
+//        setSupportActionBar(customAppBarLayoutBinding.customToolbar);
+        setSupportActionBar(binding.customToolbar);
 
         binding.bottomNavigationView.setLabelVisibilityMode(NavigationBarView.LABEL_VISIBILITY_UNLABELED);
 
@@ -124,12 +125,12 @@ public class MainActivity extends AppCompatActivity {
                 preferenceManager.getString(Constants.KEY_USER_ID)
         );
         documentReference.update(Constants.KEY_FCM_TOKEN, token)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        showToast("Token Updated Successfully");
-                    }
-                })
+//                .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                    @Override
+//                    public void onSuccess(Void unused) {
+//                        showToast("Token Updated Successfully");
+//                    }
+//                })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
@@ -141,5 +142,24 @@ public class MainActivity extends AppCompatActivity {
 
     private void showToast(String message){
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    public void hideAppBarAndNavigationBar() {
+        binding.customAppBarLayout.setVisibility(View.GONE);
+        binding.bottomNavigationView.setVisibility(View.GONE);
+    }
+
+    public void showAppBarAndNavigationBar() {
+        binding.customAppBarLayout.setVisibility(View.VISIBLE);
+        binding.bottomNavigationView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        // Check if the back stack is empty after the pop
+        if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
+            showAppBarAndNavigationBar();
+        }
     }
 }

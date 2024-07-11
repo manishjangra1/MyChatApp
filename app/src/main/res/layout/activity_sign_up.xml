@@ -36,7 +36,7 @@
                     android:layout_height="@dimen/_80sdp"
                     android:background="@drawable/image_background"
                     android:scaleType="centerCrop"
-                    app:shapeAppearanceOverlay="@style/rounded_image_view_style"/>
+                    app:shapeAppearanceOverlay="@style/big_rounded_image_overlay_style"/>
 
                 <TextView
                     android:id="@+id/input_image_sign_up_text"

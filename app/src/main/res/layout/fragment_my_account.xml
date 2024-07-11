@@ -21,7 +21,8 @@
              android:layout_height="@dimen/_80sdp"
              android:background="@drawable/image_background"
              android:layout_gravity="center"
-             app:shapeAppearanceOverlay="@style/rounded_image_view_style" />
+             android:scaleType="centerCrop"
+             app:shapeAppearanceOverlay="@style/big_rounded_image_overlay_style" />
 
          <View
              android:layout_width="match_parent"

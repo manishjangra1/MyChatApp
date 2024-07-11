@@ -10,15 +10,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.manishjangra.mychatapp.databinding.ItemContainerUserBinding;
+import com.manishjangra.mychatapp.listeners.UserListener;
 import com.manishjangra.mychatapp.model.User;
 
 import java.util.ArrayList;
 
 public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHolder> {
     private final ArrayList<User> usersList;
+    private final UserListener userListener;
 
-    public UsersAdapter(ArrayList<User> usersList) {
+    public UsersAdapter(ArrayList<User> usersList, UserListener userListener) {
         this.usersList = usersList;
+        this.userListener = userListener;
     }
 
 
@@ -44,9 +47,9 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
         ItemContainerUserBinding binding;
 
 
-        public UserViewHolder(@NonNull View itemView) {
-            super(itemView);
-        }
+//        public UserViewHolder(@NonNull View itemView) {
+//            super(itemView);
+//        }
 
         UserViewHolder(ItemContainerUserBinding itemContainerUserBinding){
             super(itemContainerUserBinding.getRoot());
@@ -57,6 +60,12 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
             binding.userNameText.setText(user.getName());
             binding.userEmailText.setText(user.getEmail());
             binding.userProfileImageView.setImageBitmap(getUserImage(user.getImage()));
+            binding.getRoot().setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    userListener.onUserClicked(user);
+                }
+            });
         }
 
     }

@@ -13,9 +13,19 @@
     </style>
 
 
-    <style name="rounded_image_view_style" parent="">
+    <style name="big_rounded_image_overlay_style" parent="">
             <item name="cornerFamily">rounded</item>
             <item name="cornerSize">@dimen/_40sdp</item>
+    </style>
+
+    <style name="small_rounded_image_overlay_style" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/_20sdp</item>
+    </style>
+
+    <style name="extra_small_rounded_image_overlay_style" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/_13sdp</item>
     </style>
 
 </resources>

@@ -7,10 +7,11 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/user_profile_image_view"
-        android:layout_width="@dimen/_35sdp"
-        android:layout_height="@dimen/_35sdp"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
         android:background="@drawable/image_background"
         android:scaleType="centerCrop"
+        app:shapeAppearanceOverlay="@style/small_rounded_image_overlay_style"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
     
