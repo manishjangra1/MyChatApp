@@ -5,4 +5,6 @@ import java.util.Date;
 public class ConversationMessage {
     public String senderId, receiverId, message, dateTime;
     public Date dateObject;
+
+    public String conversationId, conversationName, conversationImage;
 }

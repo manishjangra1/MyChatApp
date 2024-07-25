@@ -10,7 +10,6 @@
         android:layout_height="0dp"/>
 
 <RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -20,30 +19,9 @@
     tools:context=".activities.MainActivity">
 
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/custom_app_bar_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/extra_light_color22">
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/custom_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:title="My Profile"
-            app:titleCentered="true" />
-
-
-    </com.google.android.material.appbar.AppBarLayout>
-
 <androidx.fragment.app.FragmentContainerView
     android:id="@+id/container_frame_layout"
     android:layout_above="@id/bottom_navigation_view"
-    android:layout_below="@id/custom_app_bar_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"/>
 

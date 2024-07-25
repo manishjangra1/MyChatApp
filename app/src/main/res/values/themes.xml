@@ -28,4 +28,10 @@
         <item name="cornerSize">@dimen/_13sdp</item>
     </style>
 
+
+    <style name="my_profile_user_details_margin_style">
+        <item name="android:layout_margin">@dimen/_5sdp</item> <!-- Change the margin value as needed -->
+        <item name="android:radius">@dimen/_10sdp</item>
+    </style>
+
 </resources>

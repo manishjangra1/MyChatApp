@@ -22,6 +22,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.manishjangra.mychatapp.R;
 import com.manishjangra.mychatapp.activities.SignInActivity;
 import com.manishjangra.mychatapp.databinding.FragmentMyAccountBinding;
 import com.manishjangra.mychatapp.utilities.Constants;
@@ -66,10 +67,15 @@ public class MyAccountFragment extends Fragment {
         userViewModel.getUser().observe(getViewLifecycleOwner(), user -> {
 
             binding.myAccountTextName.setText(preferenceManager.getString(Constants.KEY_NAME));
+            binding.myAccountAppBarTextName.setText(preferenceManager.getString(Constants.KEY_NAME));
             byte[] bytes = android.util.Base64.decode(preferenceManager.getString(Constants.KEY_IMAGE), android.util.Base64.DEFAULT);
             Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
             binding.myAccountImageView.setImageBitmap(bitmap);
             binding.myAccountTextEmail.setText(preferenceManager.getString(Constants.KEY_EMAIL));
+
+            //load existing bio from sharedpreference
+            binding.userProfileBio.setText(preferenceManager.getString(Constants.KEY_USER_BIO));
+
 
             Glide.with(this)
                     .load(bitmap)
@@ -115,15 +121,30 @@ public class MyAccountFragment extends Fragment {
                 signOut();
             }
         });
+
+        binding.myProfileEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                binding.userProfileBio.setEnabled(true);
+                binding.buttonSave.setVisibility(View.VISIBLE);
+                binding.myProfileEdit.setVisibility(View.GONE);
+
+            }
+        });
+
+        binding.buttonSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                preferenceManager.putString(Constants.KEY_USER_BIO, binding.userProfileBio.getText().toString());
+                binding.userProfileBio.setEnabled(false);
+                binding.buttonSave.setVisibility(View.GONE);
+                binding.myProfileEdit.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
     private void showToast(String message){
         Toast.makeText(requireActivity().getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        ((AppCompatActivity)requireActivity()).getSupportActionBar().setTitle("My Profile");
-    }
 }

@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clipToPadding="false"
+    android:fitsSystemWindows="true"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:animateLayoutChanges="true"
-    tools:context=".fragments.ConversationFragment">
+    tools:context=".activities.ConversationActivity">
 
 
     <View
@@ -54,6 +56,19 @@
         app:layout_constraintTop_toBottomOf="@id/chat_user_info"
         />
 
+    <TextView
+        android:id="@+id/receiver_user_availability"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/view_supporter"
+        android:background="@color/extra_light_color11"
+        android:text="Online..."
+        android:gravity="center"
+        android:textSize="@dimen/_10ssp"
+        android:textColor="@color/color4"
+        android:padding="@dimen/_2sdp"
+        android:visibility="gone"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/conversation_recycler_view"
         android:layout_width="match_parent"
@@ -66,7 +81,7 @@
         android:visibility="gone"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@id/input_message"
-        app:layout_constraintTop_toBottomOf="@id/view_supporter"
+        app:layout_constraintTop_toBottomOf="@id/receiver_user_availability"
         />
 
     <ProgressBar
@@ -79,7 +94,7 @@
         app:layout_constraintStart_toStartOf="parent"
         />
 
-    
+
     <FrameLayout
         android:id="@+id/send_message_button_layout"
         android:layout_width="@dimen/_40sdp"

@@ -1,3 +1,5 @@
+import com.android.build.api.dsl.Packaging
+
 plugins {
     alias(libs.plugins.android.application)
 
@@ -7,6 +9,12 @@ plugins {
 android {
     namespace = "com.manishjangra.mychatapp"
     compileSdk = 34
+
+    packaging {
+        resources {
+            excludes += ("META-INF/DEPENDENCIES")
+        }
+    }
 
     defaultConfig {
         applicationId = "com.manishjangra.mychatapp"
@@ -62,5 +70,12 @@ dependencies {
     //for smooth loading of picture
     implementation("com.github.bumptech.glide:glide:4.12.0")
     annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
+
+    //Retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation("com.squareup.retrofit2:converter-scalars:2.11.0")
+
+    //Push Notification
+    implementation("com.google.auth:google-auth-library-oauth2-http:1.19.0")
 
 }

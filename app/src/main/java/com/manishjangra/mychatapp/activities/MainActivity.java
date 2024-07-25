@@ -24,7 +24,6 @@ import com.manishjangra.mychatapp.databinding.ActivityMainBinding;
 import com.manishjangra.mychatapp.databinding.CustomAppBarLayoutBinding;
 import com.manishjangra.mychatapp.fragments.HomeFragment;
 import com.manishjangra.mychatapp.fragments.MyAccountFragment;
-import com.manishjangra.mychatapp.fragments.ConversationFragment;
 import com.manishjangra.mychatapp.fragments.UsersFragment;
 import com.manishjangra.mychatapp.model.User;
 import com.manishjangra.mychatapp.utilities.Constants;
@@ -33,7 +32,7 @@ import com.manishjangra.mychatapp.viewmodel.UserViewModel;
 
 import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
     private ActivityMainBinding binding;
     private PreferenceManager preferenceManager;
     private UserViewModel userViewModel;
@@ -42,15 +41,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        //setContentView(R.layout.activity_main);
-
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-//        customAppBarLayoutBinding = CustomAppBarLayoutBinding.bind(findViewById(R.id.main_app_bar_layout));
-//  --> wrong approach      customAppBarLayoutBinding = CustomAppBarLayoutBinding.inflate(getLayoutInflater());
-//        setSupportActionBar(customAppBarLayoutBinding.customToolbar);
-        setSupportActionBar(binding.customToolbar);
 
         binding.bottomNavigationView.setLabelVisibilityMode(NavigationBarView.LABEL_VISIBILITY_UNLABELED);
 
@@ -80,11 +73,11 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int itemId = item.getItemId();
                 if (itemId == R.id.nav_home_menu){
-                    fragLoader(new HomeFragment(), true, "Home");
+                    fragLoader(new HomeFragment(), true);
                 } else if (itemId == R.id.nav_updates_menu){
-                    fragLoader(new UsersFragment(), true, "New Chat");
+                    fragLoader(new UsersFragment(), true);
                 } else {
-                    fragLoader(new MyAccountFragment(), true, "My Account");
+                    fragLoader(new MyAccountFragment(), true);
                 }
 
                 return true;
@@ -94,10 +87,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void defaultFragment(){
-        fragLoader(new HomeFragment(), false, "Home");
+        fragLoader(new HomeFragment(), false);
     }
 
-    private void fragLoader(Fragment fragment, boolean flag, String title){
+    private void fragLoader(Fragment fragment, boolean flag){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         if (flag){
@@ -106,14 +99,8 @@ public class MainActivity extends AppCompatActivity {
             fragmentTransaction.add(R.id.container_frame_layout, fragment);
         }
         fragmentTransaction.commit();
-        setTitle(title);
     }
 
-
-    @Override
-    public void setTitle(CharSequence title){
-        Objects.requireNonNull(getSupportActionBar()).setTitle(title);
-    }
 
     private void getToken(){
         FirebaseMessaging.getInstance().getToken().addOnSuccessListener(this::updateToken);
@@ -125,12 +112,6 @@ public class MainActivity extends AppCompatActivity {
                 preferenceManager.getString(Constants.KEY_USER_ID)
         );
         documentReference.update(Constants.KEY_FCM_TOKEN, token)
-//                .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                    @Override
-//                    public void onSuccess(Void unused) {
-//                        showToast("Token Updated Successfully");
-//                    }
-//                })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
@@ -144,22 +125,4 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
 
-    public void hideAppBarAndNavigationBar() {
-        binding.customAppBarLayout.setVisibility(View.GONE);
-        binding.bottomNavigationView.setVisibility(View.GONE);
-    }
-
-    public void showAppBarAndNavigationBar() {
-        binding.customAppBarLayout.setVisibility(View.VISIBLE);
-        binding.bottomNavigationView.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        // Check if the back stack is empty after the pop
-        if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
-            showAppBarAndNavigationBar();
-        }
-    }
 }

@@ -7,12 +7,14 @@ import androidx.annotation.NonNull;
 
 import java.io.Serializable;
 
-public class User implements Serializable, Parcelable {
+public class User implements Serializable {
     private String email;
     private String name;
     private String image;
     private String token;
     private String id;
+
+    private String bio;
 
     public User(String name, String email, String image) {
         this.name = name;
@@ -66,38 +68,46 @@ public class User implements Serializable, Parcelable {
         this.id = id;
     }
 
-
-// Parcelable implementation Methods below to pass the data in the Conversation Fragment -->
-
-    protected User(Parcel in) {
-        email = in.readString();
-        name = in.readString();
-        image = in.readString();
-        token = in.readString();
+    public String getBio() {
+        return bio;
     }
 
-    public static final Creator<User> CREATOR = new Creator<User>() {
-        @Override
-        public User createFromParcel(Parcel in) {
-            return new User(in);
-        }
-
-        @Override
-        public User[] newArray(int size) {
-            return new User[size];
-        }
-    };
-
-    @Override
-    public int describeContents() {
-        return 0;
+    public void setBio(String bio) {
+        this.bio = bio;
     }
 
-    @Override
-    public void writeToParcel(@NonNull Parcel dest, int flags) {
-        dest.writeString(email);
-        dest.writeString(name);
-        dest.writeString(image);
-        dest.writeString(token);
-    }
+
+    // Parcelable implementation Methods below to pass the data in the Conversation Fragment -->
+
+//    protected User(Parcel in) {
+//        email = in.readString();
+//        name = in.readString();
+//        image = in.readString();
+//        token = in.readString();
+//    }
+//
+//    public static final Creator<User> CREATOR = new Creator<User>() {
+//        @Override
+//        public User createFromParcel(Parcel in) {
+//            return new User(in);
+//        }
+//
+//        @Override
+//        public User[] newArray(int size) {
+//            return new User[size];
+//        }
+//    };
+//
+//    @Override
+//    public int describeContents() {
+//        return 0;
+//    }
+//
+//    @Override
+//    public void writeToParcel(@NonNull Parcel dest, int flags) {
+//        dest.writeString(email);
+//        dest.writeString(name);
+//        dest.writeString(image);
+//        dest.writeString(token);
+//    }
 }

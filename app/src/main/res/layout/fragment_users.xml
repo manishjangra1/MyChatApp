@@ -1,21 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clipToPadding="false"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".fragments.UsersFragment">
 
-    <com.google.android.material.search.SearchBar
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="?attr/actionBarSize">
+
+        <com.google.android.material.search.SearchBar
+            android:id="@+id/user_search_bar"
+            android:backgroundTint="@color/extra_light_color11"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_30sdp"
+            android:hint="Search new user"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <FrameLayout
+        android:layout_marginTop="?attr/actionBarSize"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:layout_marginTop="@dimen/_16sdp">
+        app:layout_behavior="com.google.android.material.search.SearchBar$ScrollingViewBehavior">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/users_list_recycler_view"
@@ -24,7 +35,10 @@
             android:orientation="vertical"
             android:overScrollMode="never"
             android:clipToPadding="false"
-            android:padding="@dimen/_20sdp"
+            android:paddingStart="@dimen/_20sdp"
+            android:paddingEnd="@dimen/_20sdp"
+            android:paddingBottom="@dimen/_20sdp"
+            android:paddingTop="0dp"
             android:visibility="gone"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
@@ -44,10 +58,8 @@
             android:textColor="@color/color4"
             android:gravity="center"
             android:textSize="@dimen/_12ssp"
-            android:visibility="gone"
-            />
+            android:visibility="gone"/>
 
     </FrameLayout>
 
-
-</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
